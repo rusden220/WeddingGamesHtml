@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/CrackMe.css">
+    <title>Crack Me</title>
+</head>
+<body>
+<div class="container">
+    <p class="big-title"><b>Уровень 3</b></p>
+    <p class="Task-text">Введи код:<span class="hiddenCode-text">123</span></p>
+    <div>
+        <input type="text" class="input-text" id="inputNumber" name="name" required minlength="1" size="10" />
+        <button class="input-button" onclick="ButtonCheckOnClick()">Отправить</button>
+    </div>
+    <div id="goodResultDiv" style="display:none">
+        <p class="correct-answer-text">О нет Дениска такой глупенький что не проверил вводит пользователь число или нет</p>
+        <button class="input-button" onClick="buttonNextQuestionOnClint()">Следующий задание</button>
+    </div>
+    <div id="helpDiv" style="display:none">
+        <p class="Task-text">чтобы взломать что-то нужно подумать что программист мог не предвидеть<br/>попробуй ещё раз</p>
+    </div>
+</div>
+
+<script>
+    function ButtonCheckOnClick() {
+        let input = document.getElementById('inputNumber').value.trim()
+
+        if(input === '')
+            return;
+
+        if(input === "")
+            return;
+
+        if(input === "123")
+        {
+            DisplayNextQuestion()
+            HideHelp()           
+        }
+        else
+        {
+            HideNextQuestion()
+            DisplayHelp()
+        }
+    }
+
+    async function buttonNextQuestionOnClint() {
+        const uid = await GetUid();
+
+        let url = "/Game/UsePassLevel?levelId=" + 3 + "&uid="+uid
+        await fetch(url);
+
+        window.location.href='/CrackMe/4.html'
+    }
+
+
+    async function GetUid() {
+        const url = "/Authentication"
+        const response = await fetch(url);
+        const json = await response.json();
+
+        return json.uid;
+    }
+
+    function DisplayHelp() {
+        let helpDiv = document.getElementById('helpDiv');
+        let actualDisplay = getComputedStyle(helpDiv).display;
+        if (actualDisplay == 'none') {
+            helpDiv.style.display = 'block';
+        }
+    }
+    function HideHelp() {
+        let helpDiv = document.getElementById('helpDiv');
+        let actualDisplay = getComputedStyle(helpDiv).display;
+        if (actualDisplay == 'block') {
+            helpDiv.style.display = 'none';
+        }
+    }
+
+    function DisplayNextQuestion() {
+        let helpDiv = document.getElementById('goodResultDiv');
+        let actualDisplay = getComputedStyle(helpDiv).display;
+        if (actualDisplay == 'none') {
+            helpDiv.style.display = 'block';
+        }
+    }
+
+    function HideNextQuestion() {
+        let helpDiv = document.getElementById('goodResultDiv');
+        let actualDisplay = getComputedStyle(helpDiv).display;
+        if (actualDisplay == 'block') {
+            helpDiv.style.display = 'none';
+        }
+    }
+
+    function isNumeric(value) {
+        return /^-?\d+$/.test(value);
+    }
+</script>
+</body>
+</html>

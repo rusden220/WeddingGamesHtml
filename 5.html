@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/CrackMe.css">
+    <title>Crack Me</title>
+</head>
+<body>
+<div class="container">
+    <p class="big-title"><b>Уровень 5</b></p>
+    <p class="Task-text">Попробуйте авторизоваться под админом:</p>
+    <div id="LoginPasswordDiv">
+        <div>
+            <label class="Task-text">Логин: </label>
+            <input type="text" class="input-text" id="AdminLogin" name="login" required minlength="1" size="10" value="admin"/>
+        </div>
+        <div>
+            <label class="Task-text">Пароль: </label>
+            <input type="password" class="input-text" id="passwordInput" name="name" required minlength="1" size="10" />
+        </div>
+        <button class="input-button" onclick="ButtonCheckOnClick()">Отправить</button>
+    </div>
+    <div id="goodResultDiv" style="display:none">
+        <p class="correct-answer-text">Поздравляю! ты совершили свою первую успешную кибер атаку. <br/>Я в восторге, можешь смело добавлять в резюме, что ты специалист по кибер безопасности</p>
+        <button class="input-button" onClick="buttonNextQuestionOnClint()">Следующий задание</button>
+    </div>
+    <div id="passwordErrorDiv" style="display:none">
+        <p id="passwordError" class="Task-text"></p>
+        <button class="input-button" onClick="DisplayHelp()">подсказка</button>
+    </div>
+    <div id="helpDiv" style="display:none">
+        <p class="Task-text"><i>В игре несколько верных паролей</i><br/>
+            * Админ глупенький и использует один из самых популярны паролей в интернете<br/>
+            * Люди часто ставят важные даты в качестве пароля<br/>
+            * Такого рода пароль часто используется по умолчанию у админа<br/>
+        </p>
+    </div>
+</div>
+
+<script>
+    function ButtonCheckOnClick() {
+        let input = document.getElementById('passwordInput').value
+
+        let passwordCheckResult = CheckPassword(input) 
+        if(passwordCheckResult === "OK")
+        {
+            DisplayNextQuestion()
+            HidePasswordError()
+            HideHelp()
+        }
+        else
+        {
+            DisplayPasswordError(passwordCheckResult)
+            HideNextQuestion()
+        }
+    }
+
+    function CheckPassword(input) {
+        const password = input.trim().toLowerCase()
+        
+        if(password === '')
+            return "пароль не может быть пустым";
+
+        if(password === "")
+            return "пароль не может быть пустым";
+        
+        if(password === "admin")
+            return "OK"
+        
+        if(password === "password")
+            return "OK"
+        
+        if(password === "123456")
+            return "OK"
+        
+        if(password === "123456789")
+            return "OK"
+        
+        const passwordAsDate = Date.parse(password);
+        
+        if(passwordAsDate === 1709845200000)
+            return "OK"
+        
+        return "Не верный пароль: " + input;
+    }
+    
+    async function buttonNextQuestionOnClint() {
+        window.location.href='/CrackMe/6.html'
+    }
+    
+    function DisplayPasswordError(errorString) {
+        let errorDiv = document.getElementById('passwordErrorDiv');
+        let actualDisplay = getComputedStyle(errorDiv).display;
+        if (actualDisplay == 'none') {
+            errorDiv.style.display = 'block';
+        }
+        document.getElementById('passwordError').innerText = errorString              
+    }
+    function HidePasswordError() {
+        let errorDiv = document.getElementById('passwordErrorDiv');
+        let actualDisplay = getComputedStyle(errorDiv).display;
+        if (actualDisplay == 'block') {
+            errorDiv.style.display = 'none';
+        }
+    }
+    function DisplayHelp() {
+        let helpDiv = document.getElementById('helpDiv');
+        let actualDisplay = getComputedStyle(helpDiv).display;
+        if (actualDisplay == 'none') {
+            helpDiv.style.display = 'block';
+        }
+    }
+    function HideHelp() {
+        let helpDiv = document.getElementById('helpDiv');
+        let actualDisplay = getComputedStyle(helpDiv).display;
+        if (actualDisplay == 'block') {
+            helpDiv.style.display = 'none';
+        }
+    }
+
+    function DisplayNextQuestion() {
+        let helpDiv = document.getElementById('goodResultDiv');
+        let actualDisplay = getComputedStyle(helpDiv).display;
+        if (actualDisplay == 'none') {
+            helpDiv.style.display = 'block';
+        }
+    }
+
+    function HideNextQuestion() {
+        let helpDiv = document.getElementById('goodResultDiv');
+        let actualDisplay = getComputedStyle(helpDiv).display;
+        if (actualDisplay == 'block') {
+            helpDiv.style.display = 'none';
+        }
+    }
+
+    function isNumeric(value) {
+        return /^-?\d+$/.test(value);
+    }
+</script>
+</body>
+</html>

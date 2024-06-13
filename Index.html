@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/CrackMe.css">
+    <title>Crack Me</title>
+</head>
+<body>
+    <div class="container">
+        <p class="big-title"><b>Crack Me</b></p>
+        <p class="Task-text">Crack me это простая игра где на каждом шаге нужно найти уязвимость на странице</p>
+        <p class="Task-text">Введите своё имя чтобы начать минимум 1 символ:</p>
+        
+        <div>
+            <input type="text" class="input-text" id="inputUserLogin" name="name" required minlength="1" size="10" />
+            <button class="input-button" onclick="ButtonSendOnClick()">Отправить</button>
+        </div>
+    
+    </div>
+    <script>
+        async function ButtonSendOnClick() {
+            let input = document.getElementById('inputUserLogin').value.trim()
+
+            if(input === '')
+                return;
+
+            if(input === "")
+                return;
+
+            await authenticateUser(input)
+        }
+        
+        async function authenticateUser(userLogin) {
+            window.location.href='/CrackMe/1.html'
+        }
+    </script>
+</body>
+</html>

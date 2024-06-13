@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/CrackMe.css">
+    <title>Crack Me</title>
+</head>
+<body>
+<div class="container">
+    <p class="big-title"><b>Уровень 1</b></p>
+    <button class="input-button" onclick="ButtonCheckOnClick()">Не нажимать</button>
+    <div id="goodResultDiv" style="display:none">
+        <p class="correct-answer-text">Мне нравится ход твоих мыслей, маленький шалунишка))</p>
+        <button class="input-button" onClick="buttonNextQuestionOnClint()">Следующий задание</button>
+    </div>
+</div>
+
+<script>
+    function ButtonCheckOnClick() {        
+        let added_item_button = document.getElementById('goodResultDiv');
+        let actualDisplay = getComputedStyle(added_item_button).display;
+        if (actualDisplay == 'none') {
+            added_item_button.style.display = 'block';
+        }
+    }
+
+    async function buttonNextQuestionOnClint() {
+        window.location.href='/CrackMe/2.html'
+    }
+</script>
+</body>
+</html>
